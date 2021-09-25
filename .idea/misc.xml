@@ -13,12 +13,21 @@
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/nav_header_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/menu/activity_drawer_drawer.xml" value="0.4" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/activity_drawer.xml" value="0.15081521739130435" />
-        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/content_drawer.xml" value="1.0" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/app_bar_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/content_drawer.xml" value="0.22573363431151242" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/fragment_login.xml" value="0.17572463768115942" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/nav_header_drawer.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/menu/activity_drawer_drawer.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/menu/drawer.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
