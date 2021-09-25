@@ -1,9 +1,10 @@
-package com.am2.eshopapp.ui.login;
+package com.am2.eshopapp.ui.register;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,30 +15,30 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.am2.eshopapp.R;
-import com.am2.eshopapp.databinding.FragmentLoginBinding;
-import com.am2.eshopapp.ui.register.RegisterFragment;
+import com.am2.eshopapp.databinding.FragmentRegisterBinding;
+import com.am2.eshopapp.ui.login.LoginFragment;
 
-public class LoginFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
-    private LoginViewModel loginViewModel;
-    private FragmentLoginBinding binding;
+    private RegisterViewModel registerViewModel;
+    private FragmentRegisterBinding binding;
     private FragmentTransaction transaction;
-    private Fragment fragmentRegister;
+    private Fragment fragmentLogin;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        loginViewModel =
-                new ViewModelProvider(this).get(LoginViewModel.class);
+        registerViewModel =
+                new ViewModelProvider(this).get(RegisterViewModel.class);
 
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        binding = FragmentRegisterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        TextView jtvSignUp;
-        jtvSignUp = root.findViewById(R.id.tvSignUp);
-        fragmentRegister = new RegisterFragment();
+        Button jtvSignIn;
+        jtvSignIn = root.findViewById(R.id.cirLoginButton);
+        fragmentLogin = new LoginFragment();
 
-        final TextView textView = binding.textLogin;
-        loginViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textRegister;
+        registerViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -52,8 +53,7 @@ public class LoginFragment extends Fragment {
         binding = null;
     }
 
-    public void goRegister(View view) {
-        transaction.replace(R.id.tvSignUp,fragmentRegister);
+    public void goLogin(View view) {
+        transaction.replace(R.id.tvSignIn,fragmentLogin);
     }
-
 }
