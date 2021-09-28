@@ -10,7 +10,7 @@
 
     <!--colors for login-->
     <color name="whiteTextColor">#fff</color>
-    <color name="primaryTextColor">#2661FA</color>
+    <color name="primaryTextColor">#9fb9fc</color>
     <color name="loginBkColor">#f0f0f0</color>
 
     <!--colors for card-->
