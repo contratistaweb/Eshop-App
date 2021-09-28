@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bk"
     android:focusableInTouchMode="true"
-    android:onClick="goRegister"
     tools:context=".ui.login.LoginFragment">
 
     <LinearLayout
@@ -65,11 +64,11 @@
         <TextView
             android:id="@+id/tvSignUp"
             style="@style/parent"
+            android:onClick="onClick"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:text="@string/login_signup_hint"
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
-
             android:textStyle="bold" />
     </LinearLayout>
 

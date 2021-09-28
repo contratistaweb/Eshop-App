@@ -85,16 +85,13 @@
             android:text="Signup"
             android:layout_gravity="right"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
-        <!--            android:onClick="goRegister"-->
         <TextView
             android:id="@+id/tvSignIn"
             style="@style/parent"
             android:layout_marginTop="@dimen/loginViewsMargin"
-
-            android:text="@string/login_signup_hint"
+            android:text="@string/signup_login_hint"
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
             android:textStyle="bold" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
