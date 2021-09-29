@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment"
-    android:background="@drawable/login_bk_land"
+    android:background="@drawable/login_bk"
     android:focusableInTouchMode="true">
 
     <androidx.constraintlayout.widget.Guideline
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.87">
 
         <Button
-            android:id="@+id/cirLoginButton"
+            android:id="@+id/cirRegisterButton"
             style="@style/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
