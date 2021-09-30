@@ -2,12 +2,15 @@ package com.am2.eshopapp.ui.login;
 
 import static androidx.navigation.Navigation.findNavController;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,16 +42,25 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         TextView jtvSignUp = binding.tvSignUp;
+        EditText jetUsuario = binding.editTextEmail;
         jtvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findNavController(view).navigate(R.id.fragmentRegister);
+                switch (view.getId()){
+                    case R.id.tvSignUp:
+                        findNavController(view).navigate(R.id.fragmentRegister);
+                        break;
+                    case R.id.cirLoginButton:
+                        String usuario;
+                        usuario = jetUsuario.getText().toString();
+
+                }
+                //
             }
         });
 
         return binding.getRoot();
     }
-
 
     @Override
     public void onDestroyView() {
