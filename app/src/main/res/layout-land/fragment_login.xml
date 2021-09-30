@@ -38,7 +38,8 @@
                 style="@style/modifiedEditText"
                 android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:autofillHints="" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -51,21 +52,21 @@
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:autofillHints="" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/cirLoginButton"
             style="@style/loginButton"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:text="Login" />
-        <!--            android:onClick="goRegister"-->
+            android:text="@string/login" />
+
         <TextView
             android:id="@+id/tvSignUp"
             style="@style/parent"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:onClick="onClick"
             android:text="@string/login_signup_hint"
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
