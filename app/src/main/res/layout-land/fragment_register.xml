@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.93">
 
         <Button
-            android:id="@+id/cirLoginButton"
+            android:id="@+id/btnRegister"
             style="@style/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
         app:layout_constraintVertical_bias="0.9">
 
         <TextView
-            android:id="@+id/text_register"
+            android:id="@+id/tvRegister"
             style="@style/loginHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,12 +112,12 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/etName"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_name_hint"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:autofillHints="" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -127,12 +127,11 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/editTextMobile"
+                android:id="@+id/etMobile"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_mobile_number_hint"
                 android:inputType="phone"
-                android:maxLines="1"
-                android:autofillHints="" />
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -142,12 +141,11 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/etEmail"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:autofillHints="" />
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,12 +158,11 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/etPassword"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
-                android:maxLines="1"
-                android:autofillHints="" />
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>

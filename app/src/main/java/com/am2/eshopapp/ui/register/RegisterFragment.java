@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,13 +24,15 @@ import com.am2.eshopapp.databinding.FragmentRegisterBinding;
 import com.am2.eshopapp.ui.login.LoginFragment;
 import com.am2.eshopapp.ui.login.LoginViewModel;
 
+import java.util.Objects;
+
 public class RegisterFragment extends Fragment {
 
     private RegisterViewModel loginViewModel;
     private FragmentRegisterBinding binding;
 
     private FragmentTransaction transaction;
-    private Fragment fragmentHome, fragmentLogin,  fragmentRegister;
+    private Fragment fragmentHome, fragmentLogin, fragmentRegister;
 
     @Nullable
     @Override
@@ -43,6 +47,32 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 findNavController(view).navigate(R.id.fragmentLogin);
+            }
+        });
+        EditText jetName = binding.etName;
+        EditText jetEmail = binding.etEmail;
+        EditText jetMobile = binding.etMobile;
+        EditText jetPassword = binding.etPassword;
+        Button jbtnRegister = binding.btnRegister;
+        jbtnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name, email, mobile, pass;
+                name = jetName.getText().toString();
+                email = jetEmail.getText().toString();
+                mobile = jetMobile.getText().toString();
+                pass = jetPassword.getText().toString();
+                if (
+                        !name.isEmpty() ||
+                                !email.isEmpty() ||
+                                !mobile.isEmpty() ||
+                                !pass.isEmpty()
+                ) {
+                    findNavController(view).navigate(R.id.nav_home);
+                } else {
+                    Toast.makeText(getContext(), "hay un campo vacio.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
