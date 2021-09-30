@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/loginViewsMargin">
 
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/etName"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_name_hint"
                 android:inputType="textPersonName"
@@ -46,7 +46,7 @@
             android:layout_marginTop="@dimen/loginViewsMargin">
 
             <EditText
-                android:id="@+id/editTextMobile"
+                android:id="@+id/etMobile"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_mobile_number_hint"
                 android:inputType="phone"
@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/loginViewsMargin">
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/etEmail"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
@@ -72,7 +72,7 @@
             android:layout_marginTop="@dimen/loginViewsMargin">
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/etPassword"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
@@ -80,7 +80,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/cirLoginButton"
+            android:id="@+id/btnRegister"
             style="@style/loginButton"
             android:text="Signup"
             android:layout_gravity="right"
