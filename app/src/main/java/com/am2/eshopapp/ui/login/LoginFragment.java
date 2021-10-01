@@ -75,7 +75,24 @@ public class LoginFragment extends Fragment {
                     Matcher m = p.matcher(email);
                     boolean b = m.matches();
                     if(b){
-                        findNavController(view).navigate(R.id.nav_home);
+                        // Validar password
+                        /* ^                 # inicio-de-cadena
+                        (?=.*[0-9])       # un número debe aparecer al menos una vez
+                        (?=.*[a-z])       # una letra minúscula debe aparecer al menos una vez
+                        (?=.*[A-Z])       # una letra mayúscula debe aparecer al menos una vez
+                        (?=.*[@#$%^&+=])  # un carácter especial debe aparecer al menos una vez
+                        (?=\\S+$)          # no se permiten espacios en blanco en toda la cadena
+                        .{4,}             # cualquier cosa, al menos 6 lugares
+                        $                 # fin de cadena */
+                        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+                        Pattern p2 = Pattern.compile(passwordPattern);
+                        Matcher m2 = p2.matcher(password);
+                        boolean b2 = m2.matches();
+                        if (b2){
+                            findNavController(view).navigate(R.id.nav_home);
+                        }else{
+                            Toast.makeText(getContext(), "Contraseña devil.", Toast.LENGTH_LONG).show();
+                        }
                     }else{
                         Toast.makeText(getContext(), "Email no coincide.", Toast.LENGTH_LONG).show();
                     }
