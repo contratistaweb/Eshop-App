@@ -76,9 +76,17 @@ public class RegisterFragment extends Fragment {
                     Pattern p = Pattern.compile(emailPattern);
                     Matcher m = p.matcher(email);
                     boolean b = m.matches();
-                    if(b){
-                        findNavController(view).navigate(R.id.nav_home);
-                    }else{
+                    if (b) {
+                        String passwordPattern = "[a-zA-Z0-9_!@]+";
+                        Pattern p2 = Pattern.compile(passwordPattern);
+                        Matcher m2 = p2.matcher(pass);
+                        boolean b2 = m2.matches();
+                        if (b2 && pass.length()>5) {
+                            findNavController(view).navigate(R.id.nav_home);
+                        } else {
+                            Toast.makeText(getContext(), "Email no coincide.", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
                         Toast.makeText(getContext(), "Email no coincide.", Toast.LENGTH_LONG).show();
                     }
                 } else {
