@@ -1,8 +1,6 @@
 package com.am2.eshopapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.Menu;
 
@@ -30,14 +28,15 @@ public class DrawerActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
+//    private FragmentTransaction transaction;
+//    private Fragment fragmentHome,fragmentGallery,  fragmentSlideshow, fragmentLogin, fragmentRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         binding = ActivityDrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
 
         setSupportActionBar(binding.appBarDrawer.toolbar);
 
@@ -48,16 +47,26 @@ public class DrawerActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        DrawerLayout drawer = binding.drawerLayout;
+        NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_login, R.id.nav_register)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
+        NavController navController = Navigation.findNavController(this , R.id.nav_host_fragment_content_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+//        fragmentHome = new HomeFragment();
+//        fragmentGallery = new GalleryFragment();
+//        fragmentSlideshow = new SlideshowFragment();
+//        fragmentHome = new HomeFragment();
+//        fragmentLogin = new LoginFragment();
+//        fragmentRegister = new RegisterFragment();
+
+//        getSupportFragmentManager().beginTransaction().add( R.id.nav_host_fragment_content_drawer, fragmentHome).commit();
 
     }
 
@@ -73,6 +82,22 @@ public class DrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+
+    public void onClick(View view) {
+//        transaction = getSupportFragmentManager().beginTransaction();
+//        switch (view.getId()) {
+//            case R.id.tvSignUp:
+//                transaction.replace(R.id.nav_host_fragment_content_drawer, fragmentRegister);
+//                transaction.addToBackStack(null);
+//                break;
+//            case R.id.tvSignIn:
+//                transaction.replace(R.id.nav_host_fragment_content_drawer, fragmentLogin);
+//                transaction.addToBackStack(null);
+//                break;
+//        }
+//        transaction.commit();
     }
 
 

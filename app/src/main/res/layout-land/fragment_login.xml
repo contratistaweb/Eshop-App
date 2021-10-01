@@ -8,65 +8,135 @@
     android:focusableInTouchMode="true"
     tools:context=".ui.login.LoginFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="400dp"
-        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline8">
 
         <TextView
             android:id="@+id/text_login"
             style="@style/loginHeader"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/loginViewsMargin" />
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="Login" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
             style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_weight="1">
 
             <EditText
                 android:id="@+id/etEmail"
                 style="@style/modifiedEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="@string/login_email_hint"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:autofillHints="" />
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputPassword"
             style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_weight="1">
 
             <EditText
                 android:id="@+id/etPassword"
                 style="@style/modifiedEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
-                android:maxLines="1"
-                android:autofillHints="" />
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!--            android:onClick="goRegister"-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/guideline13">
+
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnLogin"
             style="@style/loginButton"
-            android:layout_gravity="end"
-            android:layout_marginTop="@dimen/loginViewsMargin"
-            android:text="@string/login" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="Login"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tvSignUp"
             style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:onClick="onClick"
             android:text="@string/login_signup_hint"
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
