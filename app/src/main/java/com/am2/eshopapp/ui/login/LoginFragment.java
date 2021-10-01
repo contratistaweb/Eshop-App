@@ -2,12 +2,16 @@ package com.am2.eshopapp.ui.login;
 
 import static androidx.navigation.Navigation.findNavController;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +25,9 @@ import com.am2.eshopapp.R;
 import com.am2.eshopapp.databinding.FragmentLoginBinding;
 import com.am2.eshopapp.ui.register.RegisterFragment;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginFragment extends Fragment {
 
@@ -39,6 +46,10 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         TextView jtvSignUp = binding.tvSignUp;
+        Button jbtnLogin = binding.btnLogin;
+        EditText jetEmail = binding.etEmail;
+        EditText jetPassword = binding.etPassword;
+
         jtvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,9 +57,54 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        jbtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email, password;
+                email = jetEmail.getText().toString();
+                password = jetPassword.getText().toString();
+
+                // Si hay campos vacios
+                if (
+                        !email.isEmpty() &&
+                                !password.isEmpty()
+                ) {
+                    // si campo email tiene el formato correcto
+                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                    Pattern p = Pattern.compile(emailPattern);
+                    Matcher m = p.matcher(email);
+                    boolean b = m.matches();
+                    if(b){
+                        // Validar password
+                        /* ^                 # inicio-de-cadena
+                        (?=.*[0-9])       # un número debe aparecer al menos una vez
+                        (?=.*[a-z])       # una letra minúscula debe aparecer al menos una vez
+                        (?=.*[A-Z])       # una letra mayúscula debe aparecer al menos una vez
+                        (?=.*[@#$%^&+=])  # un carácter especial debe aparecer al menos una vez
+                        (?=\\S+$)          # no se permiten espacios en blanco en toda la cadena
+                        .{4,}             # cualquier cosa, al menos 6 lugares
+                        $                 # fin de cadena */
+                        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+                        Pattern p2 = Pattern.compile(passwordPattern);
+                        Matcher m2 = p2.matcher(password);
+                        boolean b2 = m2.matches();
+                        if (b2){
+                            findNavController(view).navigate(R.id.nav_home);
+                        }else{
+                            Toast.makeText(getContext(), "Contraseña devil.", Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(getContext(), "Email no coincide.", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "hay un campo vacio.", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
         return binding.getRoot();
     }
-
 
     @Override
     public void onDestroyView() {
