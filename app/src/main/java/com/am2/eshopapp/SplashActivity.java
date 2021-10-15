@@ -29,9 +29,6 @@ Handler handler;
         setContentView(R.layout.activity_splash);
 
         mContentView = findViewById(R.id.logImage);
-//        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-
-//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {

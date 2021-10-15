@@ -36,6 +36,7 @@ public class RegisterFragment extends Fragment {
     private FragmentTransaction transaction;
     private Fragment fragmentHome, fragmentLogin, fragmentRegister;
 
+
     @Nullable
     @Override
 
