@@ -2,10 +2,9 @@ package com.am2.eshopapp.ui.login;
 
 import static androidx.navigation.Navigation.findNavController;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,15 +15,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.am2.eshopapp.R;
 import com.am2.eshopapp.databinding.FragmentLoginBinding;
-import com.am2.eshopapp.ui.register.RegisterFragment;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +35,8 @@ public class LoginFragment extends Fragment {
 
     private FragmentTransaction transaction;
     private Fragment fragmentHome, fragmentLogin,  fragmentRegister;
+
+    private FirebaseAuth mAuth;
 
     @Nullable
     @Override
@@ -57,6 +58,10 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+
         jbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,20 +81,32 @@ public class LoginFragment extends Fragment {
                     boolean b = m.matches();
                     if(b){
                         // Validar password
-                        /* ^                 # inicio-de-cadena
-                        (?=.*[0-9])       # un número debe aparecer al menos una vez
-                        (?=.*[a-z])       # una letra minúscula debe aparecer al menos una vez
-                        (?=.*[A-Z])       # una letra mayúscula debe aparecer al menos una vez
-                        (?=.*[@#$%^&+=])  # un carácter especial debe aparecer al menos una vez
-                        (?=\\S+$)          # no se permiten espacios en blanco en toda la cadena
-                        .{4,}             # cualquier cosa, al menos 6 lugares
-                        $                 # fin de cadena */
-                        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+                        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{8,}$";
                         Pattern p2 = Pattern.compile(passwordPattern);
                         Matcher m2 = p2.matcher(password);
                         boolean b2 = m2.matches();
                         if (b2){
-                            findNavController(view).navigate(R.id.nav_home);
+                            mAuth.signInWithEmailAndPassword(email, password)
+                                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                // Sign in success, update UI with the signed-in user's information
+                                                Log.d("userEmail", "signInWithEmail:success");
+                                                FirebaseUser user = mAuth.getCurrentUser();
+//                                                updateUI(user);
+                                                findNavController(view).navigate(R.id.nav_home);
+                                            } else {
+                                                // If sign in fails, display a message to the user.
+                                                Log.w("userEmail", "signInWithEmail:failure", task.getException());
+                                                Toast.makeText(getContext(), "Authentication failed.",
+                                                        Toast.LENGTH_SHORT).show();
+//                                                updateUI(null);
+                                            }
+                                        }
+                                    });
+
+//                            findNavController(view).navigate(R.id.nav_home);
                         }else{
                             Toast.makeText(getContext(), "Contraseña devil.", Toast.LENGTH_LONG).show();
                         }
@@ -106,10 +123,12 @@ public class LoginFragment extends Fragment {
         return binding.getRoot();
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
 
 }

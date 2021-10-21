@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "891591317006",
+    "project_id": "eshop-m2",
+    "storage_bucket": "eshop-m2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891591317006:android:9f4e16db88f28bc05e0e5f",
+        "android_client_info": {
+          "package_name": "com.m2.eshopapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891591317006-hrscbjkukv4oj6slm1tdv260fd51ekv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK7D3aSWdgOUNpMTLkub4Xh_z5eK_hXWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891591317006-hrscbjkukv4oj6slm1tdv260fd51ekv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
