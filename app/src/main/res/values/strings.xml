@@ -33,4 +33,8 @@
 
 <!--    splash -->
     <string name="splash_screen">Mobile Number</string>
+
+    <string name="btn_product_edit">Editar</string>
+    <string name="btn_product_delete">Eliminar</string>
+
 </resources>
