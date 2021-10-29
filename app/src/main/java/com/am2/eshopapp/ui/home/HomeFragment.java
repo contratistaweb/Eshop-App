@@ -58,8 +58,9 @@ public class HomeFragment extends Fragment {
     }
 
     public void showData(){
+        db = FirebaseFirestore.getInstance();
         recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getContext()));
-        productAdapter = new ProductAdapter(getContext(), listProduct);
+        productAdapter = new ProductAdapter(getContext(), listProduct, db);
         recyclerViewProduct.setAdapter(productAdapter);
 
         productAdapter.SetOnClickListener(new View.OnClickListener() {
