@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_updateProductFragment"
             app:destination="@id/updateProductFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_productCreateFragment"
+            app:destination="@id/productCreateFragment" />
     </fragment>
 
     <fragment
@@ -50,6 +53,19 @@
         android:id="@+id/updateProductFragment"
         android:name="com.am2.eshopapp.ui.home.UpdateProductFragment"
         android:label="fragment_update_product"
-        tools:layout="@layout/fragment_update_product" />
+        tools:layout="@layout/fragment_update_product" >
+        <action
+            android:id="@+id/action_updateProductFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/productCreateFragment"
+        android:name="com.am2.eshopapp.ui.home.ProductCreateFragment"
+        android:label="fragment_product_create"
+        tools:layout="@layout/fragment_product_create" >
+        <action
+            android:id="@+id/action_productCreateFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
 </navigation>

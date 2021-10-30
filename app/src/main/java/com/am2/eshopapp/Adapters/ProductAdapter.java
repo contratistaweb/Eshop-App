@@ -5,6 +5,7 @@ import static androidx.navigation.Navigation.findNavController;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.am2.eshopapp.DrawerActivity;
 import com.am2.eshopapp.Entities.ProductEntity;
 import com.am2.eshopapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,6 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.inflater = LayoutInflater.from(context);
         this.model = model;
         this.db = db;
+
     }
 
     @NonNull
@@ -85,6 +89,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.jbtnProductEdit.setOnClickListener(view -> {
             findNavController(view).navigate(R.id.updateProductFragment);
 
+            Bundle result = new Bundle();
+            result.putString("bundleKey", "result");
         });
 
     }

@@ -39,4 +39,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+<!-- Create fragment -->
+    <string name="product_create_title">Create new product</string>
+    <string name="product_create_ph_name">Product name</string>
+    <string name="product_create_ph_price">Product Price</string>
+    <string name="product_create_ph_description">Product description</string>
+    <string name="product_create_ph_stock">Add product Stock</string>
+    <string name="product_create_btn_cancel">Cancel</string>
+    <string name="product_create_btn_create">Confirm</string>
+
+    <!-- Create fragment -->
+    <string name="btn_go_product_create">Add Product</string>
+
+
 </resources>
