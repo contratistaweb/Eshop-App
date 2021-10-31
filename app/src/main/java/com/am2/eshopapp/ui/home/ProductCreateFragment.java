@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,21 +29,13 @@ import java.util.Map;
 public class ProductCreateFragment extends Fragment {
 
     private FragmentProductCreateBinding binding;
-
-    Button jbtnCancelProductCreate,jbtnProductCreate;
-    EditText jetProductName, jetProductPrice, jetProductDescription, jetProductStock;
-
     private FirebaseFirestore db;
 
     public ProductCreateFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -50,25 +43,26 @@ public class ProductCreateFragment extends Fragment {
         binding = FragmentProductCreateBinding.inflate(inflater, container, false);
         Button jbtnCancelProductCreate = binding.btnCancelProductCreate;
         Button jbtnProductCreate = binding.btnProductCreate;
+        db= FirebaseFirestore.getInstance();
 
-
-
-        db = FirebaseFirestore.getInstance();
-
-        jbtnCancelProductCreate.setOnClickListener(view -> findNavController(view).navigate(R.id.nav_home));
+        jbtnCancelProductCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findNavController(view).navigate(R.id.nav_home);
+            }
+        });
 
         jbtnProductCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveProduct();
+                saveProductToFirestore();
                 findNavController(view).navigate(R.id.nav_home);
             }
         });
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_create, container, false);
+        return binding.getRoot();
     }
 
-    public void saveProduct(){
+    public void saveProductToFirestore(){
         EditText jetProductName = binding.etProductName;
         EditText jetProductPrice = binding.etProductPrice;
         EditText jetProductDescription = binding.etProductDescription;
