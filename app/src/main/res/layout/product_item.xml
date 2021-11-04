@@ -63,7 +63,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_product_edit"
+                    android:id="@+id/btnProductEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -71,7 +71,7 @@
                     android:text="@string/btn_product_edit" />
 
                 <Button
-                    android:id="@+id/btn_product_delete"
+                    android:id="@+id/btnProductDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

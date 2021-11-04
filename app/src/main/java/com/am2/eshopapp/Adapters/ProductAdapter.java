@@ -4,7 +4,6 @@ import static androidx.navigation.Navigation.findNavController;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +13,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultOwner;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.am2.eshopapp.DrawerActivity;
 import com.am2.eshopapp.Entities.ProductEntity;
 import com.am2.eshopapp.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.am2.eshopapp.ui.home.UpdateProductFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.LongSummaryStatistics;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements View.OnClickListener {
 
@@ -38,11 +38,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private View.OnClickListener listener;
     private FirebaseFirestore db;
 
+    private Context context;
+
     public ProductAdapter(Context context, ArrayList<ProductEntity> model, FirebaseFirestore db) {
         this.inflater = LayoutInflater.from(context);
         this.model = model;
         this.db = db;
-
+this.context = context;
     }
 
     @NonNull
@@ -83,14 +85,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
         holder.jbtnProductDelete.setOnClickListener(view -> {
             builder.setMessage("Are you sure of delete this item?");
-           builder.create().show();
+            builder.create().show();
         });
 
+        // Edit Button
         holder.jbtnProductEdit.setOnClickListener(view -> {
-            findNavController(view).navigate(R.id.updateProductFragment);
+            UpdateProductFragment fragment = new UpdateProductFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("id", holder.jtvProductName.getText().toString());
+            fragment.setArguments(bundle);
+            // se supone reemplaza la vista despues de enviar el dato guardado en el bondle // hasta este punto no sucede nada al hacer click en update
+            ((AppCompatActivity) context ).getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, fragment).commit();
+            // es la redireccion que usamos entre fragments (funciona para ir de un fragment a otro)
+//            findNavController(view).navigate(R.id.updateProductFragment);
 
-            Bundle result = new Bundle();
-            result.putString("bundleKey", "result");
         });
 
     }
@@ -118,8 +126,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             jtvProductPrice = itemView.findViewById(R.id.tvProductPrice);
             jtvProductStock = itemView.findViewById(R.id.tvProductsStock);
             jtvProductDescription = itemView.findViewById(R.id.tvProductDescription);
-            jbtnProductDelete = itemView.findViewById(R.id.btn_product_delete);
-            jbtnProductEdit = itemView.findViewById(R.id.btn_product_edit);
+            jbtnProductDelete = itemView.findViewById(R.id.btnProductDelete);
+            jbtnProductEdit = itemView.findViewById(R.id.btnProductEdit);
         }
     }
 }

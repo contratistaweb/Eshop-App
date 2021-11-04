@@ -1,11 +1,13 @@
 package com.am2.eshopapp;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
 import com.am2.eshopapp.ui.gallery.GalleryFragment;
 import com.am2.eshopapp.ui.home.HomeFragment;
+import com.am2.eshopapp.ui.home.UpdateProductFragment;
 import com.am2.eshopapp.ui.login.LoginFragment;
 import com.am2.eshopapp.ui.register.RegisterFragment;
 import com.am2.eshopapp.ui.slideshow.SlideshowFragment;
@@ -25,6 +27,7 @@ import com.am2.eshopapp.databinding.ActivityDrawerBinding;
 
 public class DrawerActivity extends AppCompatActivity {
 
+    public FragmentManager getSupportFragmentManager;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
 
