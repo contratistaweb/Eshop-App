@@ -95,9 +95,9 @@ this.context = context;
             bundle.putString("id", holder.jtvProductName.getText().toString());
             fragment.setArguments(bundle);
             // se supone reemplaza la vista despues de enviar el dato guardado en el bondle // hasta este punto no sucede nada al hacer click en update
-            ((AppCompatActivity) context ).getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, fragment).commit();
+            //((AppCompatActivity) context ).getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, fragment).commit();
             // es la redireccion que usamos entre fragments (funciona para ir de un fragment a otro)
-//            findNavController(view).navigate(R.id.updateProductFragment);
+            findNavController(view).navigate(R.id.updateProductFragment);
 
         });
 
