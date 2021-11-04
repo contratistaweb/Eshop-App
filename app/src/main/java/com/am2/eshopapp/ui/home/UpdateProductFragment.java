@@ -33,10 +33,10 @@ public class UpdateProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_update_product, container, false);
 
-        textView = view.findViewById(R.id.tvRecibedId);
-        Bundle bundle = this.getArguments();
-        String myString = bundle.getString("id", "");
-        textView.setText(myString);
+//        textView = view.findViewById(R.id.tvRecibedId);
+//        Bundle bundle = this.getArguments();
+//        String myString = bundle.getString("id", "");
+//        textView.setText(myString);
 
         return inflater.inflate(R.layout.fragment_update_product, container, false);
     }
