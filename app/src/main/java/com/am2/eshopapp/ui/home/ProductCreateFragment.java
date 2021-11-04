@@ -43,6 +43,10 @@ public class ProductCreateFragment extends Fragment {
         binding = FragmentProductCreateBinding.inflate(inflater, container, false);
         Button jbtnCancelProductCreate = binding.btnCancelProductCreate;
         Button jbtnProductCreate = binding.btnProductCreate;
+        EditText jetProductName = binding.etProductName;
+        EditText jetProductPrice = binding.etProductPrice;
+        EditText jetProductDescription = binding.etProductDescription;
+        EditText jetProductStock = binding.etProductStock;
         db= FirebaseFirestore.getInstance();
 
         jbtnCancelProductCreate.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +59,25 @@ public class ProductCreateFragment extends Fragment {
         jbtnProductCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveProductToFirestore();
-                findNavController(view).navigate(R.id.nav_home);
+                String name, description, stock, price;
+                name = jetProductName.getText().toString();
+                description = jetProductDescription.getText().toString();
+                stock = jetProductStock.getText().toString();
+                price = jetProductPrice.getText().toString();
+
+                // Validar si hay campos vacios
+                if (
+                        !name.isEmpty() &&
+                                !description.isEmpty() &&
+                                !stock.isEmpty() &&
+                                !price.isEmpty()
+                ){
+                    saveProductToFirestore();
+                    findNavController(view).navigate(R.id.nav_home);
+                }else {
+                    Toast.makeText(getContext(), "Llene todos los campos.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         return binding.getRoot();
