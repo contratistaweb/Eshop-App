@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/product_create_ph_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/etProductDescription"
@@ -44,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/product_create_ph_description"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/etProductStock"
@@ -52,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/product_create_ph_stock"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/etProductPrice"
@@ -60,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/product_create_ph_price"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
