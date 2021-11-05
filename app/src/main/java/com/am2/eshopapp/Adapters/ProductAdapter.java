@@ -18,11 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.am2.eshopapp.DrawerActivity;
 import com.am2.eshopapp.Entities.ProductEntity;
 import com.am2.eshopapp.R;
+import com.am2.eshopapp.ui.home.ProductCreateFragment;
 import com.am2.eshopapp.ui.home.UpdateProductFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +34,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     LayoutInflater inflater;
     ArrayList<ProductEntity> model;
+    ProductEntity productEntity;
 
 
     //listener
@@ -62,6 +65,7 @@ this.context = context;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        productEntity = model.get(position);
         AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
         String productId = model.get(position).getId();
@@ -71,10 +75,10 @@ this.context = context;
         String productDescription = model.get(position).getDescription();
 
         holder.jtvProductId.setText(productId);
-        holder.jtvProductName.setText(productName);
-        holder.jtvProductPrice.setText(productPrice);
-        holder.jtvProductStock.setText(productStock);
-        holder.jtvProductDescription.setText(productDescription);
+        holder.jtvProductName.setText("Product name: "+productName);
+        holder.jtvProductPrice.setText("Price: "+productPrice);
+        holder.jtvProductStock.setText("Stock: "+productStock);
+        holder.jtvProductDescription.setText("Description: "+productDescription);
         builder.setPositiveButton("YES", (dialogInterface, i) -> db.collection("products").document(productId).delete().addOnSuccessListener(unused -> {
             Toast.makeText(inflater.getContext(), "Data deleted", Toast.LENGTH_LONG).show();
             model.remove(holder.getAdapterPosition());
@@ -90,15 +94,14 @@ this.context = context;
 
         // Edit Button
         holder.jbtnProductEdit.setOnClickListener(view -> {
-            UpdateProductFragment fragment = new UpdateProductFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("id", holder.jtvProductName.getText().toString());
-            fragment.setArguments(bundle);
+            bundle.putSerializable("key",productEntity);
+//            bundle.putString("hola","hola");
             // se supone reemplaza la vista despues de enviar el dato guardado en el bondle // hasta este punto no sucede nada al hacer click en update
             //((AppCompatActivity) context ).getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, fragment).commit();
             // es la redireccion que usamos entre fragments (funciona para ir de un fragment a otro)
-            findNavController(view).navigate(R.id.updateProductFragment);
-
+            Navigation.findNavController(holder.view).navigate(R.id.updateProductFragment,bundle);
+//            action_nav_home_to_updateProductFragment
         });
 
     }
@@ -118,9 +121,11 @@ this.context = context;
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jtvProductId, jtvProductName, jtvProductPrice, jtvProductStock, jtvProductDescription;
         Button jbtnProductDelete, jbtnProductEdit;
+        View view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            view = itemView;
             jtvProductId = itemView.findViewById(R.id.tvProductId);
             jtvProductName = itemView.findViewById(R.id.tvProductName);
             jtvProductPrice = itemView.findViewById(R.id.tvProductPrice);

@@ -57,6 +57,12 @@
         <action
             android:id="@+id/action_updateProductFragment_to_nav_home"
             app:destination="@id/nav_home" />
+        <argument
+            android:name="hola"
+            app:argType="string" />
+        <argument
+            android:name="key"
+            app:argType="com.am2.eshopapp.Entities.ProductEntity" />
     </fragment>
     <fragment
         android:id="@+id/productCreateFragment"

@@ -2,7 +2,9 @@ package com.am2.eshopapp.Entities;
 
 import com.google.firebase.firestore.DocumentId;
 
-public class ProductEntity {
+import java.io.Serializable;
+
+public class ProductEntity implements Serializable {
 @DocumentId
     private String id;
     private String name;
