@@ -65,7 +65,6 @@ this.context = context;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        productEntity = model.get(position);
         AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
         String productId = model.get(position).getId();
@@ -94,14 +93,11 @@ this.context = context;
 
         // Edit Button
         holder.jbtnProductEdit.setOnClickListener(view -> {
+        productEntity = model.get(position);
             Bundle bundle = new Bundle();
             bundle.putSerializable("key",productEntity);
-//            bundle.putString("hola","hola");
-            // se supone reemplaza la vista despues de enviar el dato guardado en el bondle // hasta este punto no sucede nada al hacer click en update
-            //((AppCompatActivity) context ).getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, fragment).commit();
-            // es la redireccion que usamos entre fragments (funciona para ir de un fragment a otro)
-            Navigation.findNavController(holder.view).navigate(R.id.updateProductFragment,bundle);
-//            action_nav_home_to_updateProductFragment
+            Navigation.findNavController(holder.itemView).navigate(R.id.updateProductFragment,bundle);
+//            Navigation.findNavController(holder.view).navigate(R.id.updateProductFragment,bundle);
         });
 
     }
