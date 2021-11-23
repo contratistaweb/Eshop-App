@@ -48,6 +48,7 @@
     <string name="product_create_ph_stock">Add product Stock</string>
     <string name="product_create_btn_cancel">Cancel</string>
     <string name="product_create_btn_create">Confirm</string>
+    <string name="product_create_btnPickImage">Seleccionar Imagen</string>
 
     <!-- Create fragment -->
     <string name="btn_go_product_create">Add Product</string>

@@ -65,12 +65,12 @@ public class HomeFragment extends Fragment {
         productAdapter = new ProductAdapter(getContext(), listProduct, db);
         recyclerViewProduct.setAdapter(productAdapter);
 
-        productAdapter.SetOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        productAdapter.SetOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
     public void getProducts() {

@@ -9,23 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.am2.eshopapp.DrawerActivity;
 import com.am2.eshopapp.Entities.ProductEntity;
 import com.am2.eshopapp.R;
-import com.am2.eshopapp.ui.home.ProductCreateFragment;
-import com.am2.eshopapp.ui.home.UpdateProductFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -72,12 +65,14 @@ this.context = context;
         String productPrice = model.get(position).getPrice();
         String productStock = model.get(position).getStock();
         String productDescription = model.get(position).getDescription();
+        int ivProductImg = model.get(position).getIvProductImg();
 
         holder.jtvProductId.setText(productId);
         holder.jtvProductName.setText("Product name: "+productName);
         holder.jtvProductPrice.setText("Price: "+productPrice);
         holder.jtvProductStock.setText("Stock: "+productStock);
         holder.jtvProductDescription.setText("Description: "+productDescription);
+        holder.jivProductImg.setImageResource(ivProductImg);
         builder.setPositiveButton("YES", (dialogInterface, i) -> db.collection("products").document(productId).delete().addOnSuccessListener(unused -> {
             Toast.makeText(inflater.getContext(), "Data deleted", Toast.LENGTH_LONG).show();
             model.remove(holder.getAdapterPosition());
@@ -117,6 +112,7 @@ this.context = context;
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jtvProductId, jtvProductName, jtvProductPrice, jtvProductStock, jtvProductDescription;
         Button jbtnProductDelete, jbtnProductEdit;
+        ImageView jivProductImg;
         View view;
 
         public ViewHolder(@NonNull View itemView) {
@@ -129,6 +125,7 @@ this.context = context;
             jtvProductDescription = itemView.findViewById(R.id.tvProductDescription);
             jbtnProductDelete = itemView.findViewById(R.id.btnProductDelete);
             jbtnProductEdit = itemView.findViewById(R.id.btnProductEdit);
+            jivProductImg = itemView.findViewById(R.id.ivProductImg);
         }
     }
 }
