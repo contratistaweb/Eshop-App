@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.am2.eshopapp.Entities.ProductEntity;
 import com.am2.eshopapp.R;
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -65,14 +66,21 @@ this.context = context;
         String productPrice = model.get(position).getPrice();
         String productStock = model.get(position).getStock();
         String productDescription = model.get(position).getDescription();
-        int ivProductImg = model.get(position).getIvProductImg();
+        //String productImageUrl = model.get(position).getImageUrl();
 
         holder.jtvProductId.setText(productId);
         holder.jtvProductName.setText("Product name: "+productName);
         holder.jtvProductPrice.setText("Price: "+productPrice);
         holder.jtvProductStock.setText("Stock: "+productStock);
         holder.jtvProductDescription.setText("Description: "+productDescription);
-        holder.jivProductImg.setImageResource(ivProductImg);
+
+        Glide.with(context)
+                .load(model.get(position).getImageUrl())
+                .placeholder(R.drawable.ic_person_black_48dp)
+                .error(R.drawable.ic_person_black_48dp)
+                .circleCrop()
+                .into(holder.jivProductImg);
+
         builder.setPositiveButton("YES", (dialogInterface, i) -> db.collection("products").document(productId).delete().addOnSuccessListener(unused -> {
             Toast.makeText(inflater.getContext(), "Data deleted", Toast.LENGTH_LONG).show();
             model.remove(holder.getAdapterPosition());

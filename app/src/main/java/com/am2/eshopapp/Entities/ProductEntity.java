@@ -11,15 +11,17 @@ public class ProductEntity implements Serializable {
     private String price;
     private String stock;
     private String description;
-    private int ivProductImg;
 
-    public int getIvProductImg() {
-        return ivProductImg;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setIvProductImg(int ivProductImg) {
-        this.ivProductImg = ProductEntity.this.ivProductImg;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
+
+    private String imageUrl;
+
 
 
 
@@ -33,12 +35,12 @@ public class ProductEntity implements Serializable {
 
     public ProductEntity(){}
 
-    public ProductEntity(String name, String price, String stock, String description, int ivProductImg) {
+    public ProductEntity(String name, String price, String stock, String description, String imageUrl) {
         this.name = name;
         this.price = price;
         this.stock = stock;
         this.description = description;
-        this.ivProductImg = ProductEntity.this.ivProductImg;
+        this.imageUrl = imageUrl;
 
     }
 
