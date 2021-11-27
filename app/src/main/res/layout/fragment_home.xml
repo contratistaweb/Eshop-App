@@ -20,7 +20,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/btn_go_product_create" />
+            android:text="@string/btn_go_product_create"
+            android:visibility="gone" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -18,9 +18,15 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.am2.eshopapp.Entities.ProductEntity;
+import com.am2.eshopapp.Entities.SharedPreferenceEntities;
+import com.am2.eshopapp.Entities.Usuario;
 import com.am2.eshopapp.R;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -36,6 +42,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private FirebaseFirestore db;
 
     private Context context;
+
+    private Usuario usuario;
 
     public ProductAdapter(Context context, ArrayList<ProductEntity> model, FirebaseFirestore db) {
         this.inflater = LayoutInflater.from(context);
@@ -76,9 +84,8 @@ this.context = context;
 
         Glide.with(context)
                 .load(model.get(position).getImageUrl())
-                .placeholder(R.drawable.ic_person_black_48dp)
-                .error(R.drawable.ic_person_black_48dp)
-                .circleCrop()
+                .placeholder(R.drawable.bolsa_de_la_compra)
+                .error(R.drawable.bolsa_de_la_compra)
                 .into(holder.jivProductImg);
 
         builder.setPositiveButton("YES", (dialogInterface, i) -> db.collection("products").document(productId).delete().addOnSuccessListener(unused -> {
@@ -89,6 +96,14 @@ this.context = context;
         builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
 
         });
+
+        String email = SharedPreferenceEntities.leerPreferencia(2);
+        if(email.equals("p.anito@example.com")){
+            holder.jbtnProductDelete.setVisibility(View.VISIBLE);
+            holder.jbtnProductEdit.setVisibility(View.VISIBLE);
+        }
+
+        // Delete Button
         holder.jbtnProductDelete.setOnClickListener(view -> {
             builder.setMessage("Are you sure of delete this item?");
             builder.create().show();
@@ -97,10 +112,24 @@ this.context = context;
         // Edit Button
         holder.jbtnProductEdit.setOnClickListener(view -> {
         productEntity = model.get(position);
+            SharedPreferenceEntities.limpiarPreferencia();
             Bundle bundle = new Bundle();
             bundle.putSerializable("key",productEntity);
             Navigation.findNavController(holder.itemView).navigate(R.id.updateProductFragment,bundle);
 //            Navigation.findNavController(holder.view).navigate(R.id.updateProductFragment,bundle);
+        });
+
+        holder.jbtnComprar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = SharedPreferenceEntities.leerPreferencia(2);
+                if (email.equals("")){
+                    Toast.makeText(context, "Debes iniciar sesión.", Toast.LENGTH_LONG).show();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("key",productEntity);
+                    Navigation.findNavController(holder.itemView).navigate(R.id.nav_login,bundle);
+                }
+            }
         });
 
     }
@@ -118,14 +147,16 @@ this.context = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView jtvProductId, jtvProductName, jtvProductPrice, jtvProductStock, jtvProductDescription;
-        Button jbtnProductDelete, jbtnProductEdit;
+        TextView jetUserEmail, jetUserName, jtvProductId, jtvProductName, jtvProductPrice, jtvProductStock, jtvProductDescription;
+        Button jbtnProductDelete, jbtnProductEdit, jbtnComprar;
         ImageView jivProductImg;
         View view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
+            jetUserEmail = itemView.findViewById(R.id.etEmail);
+            jetUserName = itemView.findViewById(R.id.etName);
             jtvProductId = itemView.findViewById(R.id.tvProductId);
             jtvProductName = itemView.findViewById(R.id.tvProductName);
             jtvProductPrice = itemView.findViewById(R.id.tvProductPrice);
@@ -133,6 +164,7 @@ this.context = context;
             jtvProductDescription = itemView.findViewById(R.id.tvProductDescription);
             jbtnProductDelete = itemView.findViewById(R.id.btnProductDelete);
             jbtnProductEdit = itemView.findViewById(R.id.btnProductEdit);
+            jbtnComprar = itemView.findViewById(R.id.btnComprar);
             jivProductImg = itemView.findViewById(R.id.ivProductImg);
         }
     }

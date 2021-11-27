@@ -47,8 +47,11 @@ public class HomeFragment extends Fragment {
         // Mostrar data
         showData();
 
-
         btnAddProduct = view.findViewById(R.id.btnGoProductCreate);
+        String role = "vendedor";
+        if(role.equals("vendedor")){
+            btnAddProduct.setVisibility(View.VISIBLE);
+        }
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

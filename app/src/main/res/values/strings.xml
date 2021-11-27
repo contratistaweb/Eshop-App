@@ -33,7 +33,7 @@
 
     <!--    splash -->
     <string name="splash_screen">Mobile Number</string>
-
+    <string name="btn_comprar_producto">Comprar Producto</string>
     <string name="btn_product_edit">Editar</string>
     <string name="btn_product_delete">Eliminar</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -52,6 +52,8 @@
 
     <!-- Create fragment -->
     <string name="btn_go_product_create">Add Product</string>
+
+    <string name="Preference_key">Add Product</string>
 
 
 </resources>

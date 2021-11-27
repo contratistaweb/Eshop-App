@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
+import com.am2.eshopapp.Entities.SharedPreferenceEntities;
 import com.am2.eshopapp.ui.gallery.GalleryFragment;
 import com.am2.eshopapp.ui.home.HomeFragment;
 import com.am2.eshopapp.ui.home.UpdateProductFragment;
@@ -37,6 +38,8 @@ public class DrawerActivity extends AppCompatActivity {
 
         binding = ActivityDrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        SharedPreferenceEntities.setContext(this);
 
         setSupportActionBar(binding.appBarDrawer.toolbar);
 

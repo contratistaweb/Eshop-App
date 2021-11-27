@@ -16,15 +16,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
+import com.am2.eshopapp.Entities.SharedPreferenceEntities;
+import com.am2.eshopapp.Entities.Usuario;
 import com.am2.eshopapp.R;
 import com.am2.eshopapp.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +41,10 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
     private FragmentLoginBinding binding;
+    private FirebaseUser user;
+    private ArrayList<Usuario> arrayList;
+    private FirebaseFirestore db;
+    private Usuario usuario;
 
     private FragmentTransaction transaction;
     private Fragment fragmentHome, fragmentLogin,  fragmentRegister;
@@ -50,6 +63,7 @@ public class LoginFragment extends Fragment {
         Button jbtnLogin = binding.btnLogin;
         EditText jetEmail = binding.etEmail;
         EditText jetPassword = binding.etPassword;
+        db = FirebaseFirestore.getInstance();
 
         jtvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +74,7 @@ public class LoginFragment extends Fragment {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        arrayList = new ArrayList<>();
 
 
         jbtnLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +106,13 @@ public class LoginFragment extends Fragment {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()) {
+//                                                user = mAuth.getCurrentUser();
                                                 // Sign in success, update UI with the signed-in user's information
-                                                Log.d("userEmail", "signInWithEmail:success");
-                                                FirebaseUser user = mAuth.getCurrentUser();
+//                                                Log.d("userEmail", "signInWithEmail:success");
+//                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                consultaUser(view);
 //                                                updateUI(user);
-                                                findNavController(view).navigate(R.id.nav_home);
+//                                                findNavController(view).navigate(R.id.nav_home);
                                             } else {
                                                 // If sign in fails, display a message to the user.
                                                 Log.w("userEmail", "signInWithEmail:failure", task.getException());
@@ -121,6 +138,29 @@ public class LoginFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    public void consultaUser(View view){
+        String email = binding.etEmail.getText().toString();
+        db.collection("Users").whereEqualTo("email", email)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                        usuario = documentSnapshot.toObject(Usuario.class);
+                        break;
+                    }
+                    SharedPreferenceEntities.setEmail(usuario.getEmail());
+                    SharedPreferenceEntities.setName(usuario.getName());
+//                    SharedPreferenceEntities.setRol(usuario.getRol());
+                    SharedPreferenceEntities.guardarPreferecia();
+                    findNavController(view).navigate(R.id.nav_home);
+                }else {
+                    Toast.makeText(getContext(), "SharedPreference_Paila", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
