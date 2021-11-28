@@ -2,6 +2,7 @@ package com.am2.eshopapp.ui.home;
 
 import static androidx.navigation.Navigation.findNavController;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.am2.eshopapp.Adapters.ProductAdapter;
 import com.am2.eshopapp.Entities.ProductEntity;
+import com.am2.eshopapp.Entities.SharedPreferenceEntities;
+import com.am2.eshopapp.Entities.Usuario;
 import com.am2.eshopapp.R;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -48,10 +51,12 @@ public class HomeFragment extends Fragment {
         showData();
 
         btnAddProduct = view.findViewById(R.id.btnGoProductCreate);
-        String role = "vendedor";
-        if(role.equals("vendedor")){
-            btnAddProduct.setVisibility(View.VISIBLE);
-        }
+        String rol = "";
+            if (rol.equals("vendedor")) {
+                btnAddProduct.setVisibility(View.VISIBLE);
+            } else {
+                btnAddProduct.setVisibility(View.INVISIBLE);
+            }
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,13 +72,6 @@ public class HomeFragment extends Fragment {
         recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getContext()));
         productAdapter = new ProductAdapter(getContext(), listProduct, db);
         recyclerViewProduct.setAdapter(productAdapter);
-
-//        productAdapter.SetOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
     }
 
     public void getProducts() {

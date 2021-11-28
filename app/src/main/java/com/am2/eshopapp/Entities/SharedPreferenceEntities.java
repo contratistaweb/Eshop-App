@@ -48,6 +48,8 @@ public class SharedPreferenceEntities {
 
         if (!getEmail().isEmpty()){
             editor.putString("email", getEmail());
+            editor.putString("name", getName());
+            editor.putString("rol", getRol());
         }
 
         editor.commit();

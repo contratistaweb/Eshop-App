@@ -125,7 +125,7 @@ public class LoginFragment extends Fragment {
 
 //                            findNavController(view).navigate(R.id.nav_home);
                         }else{
-                            Toast.makeText(getContext(), "Contraseña devil.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Contraseña debil.", Toast.LENGTH_LONG).show();
                         }
                     }else{
                         Toast.makeText(getContext(), "Email no coincide.", Toast.LENGTH_LONG).show();

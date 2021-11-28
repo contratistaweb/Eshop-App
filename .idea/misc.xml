@@ -6,8 +6,6 @@
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable-v24/login_button_bk.xml" value="0.2703125" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
-        <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.2703125" />
-        <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2703125" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable/ic_person_black_48dp.xml" value="0.2703125" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable/ic_shopping_bag.xml" value="0.2703125" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/drawable/side_nav_bar.xml" value="0.2703125" />
@@ -24,7 +22,7 @@
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/fragment_update_product.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/nav_header_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/product_item.xml" value="0.2259963768115942" />
+        <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/product_item.xml" value="0.20516304347826086" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/layout/splash.xml" value="0.2" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/menu/activity_drawer_drawer.xml" value="0.4" />
         <entry key="..\:/Users/Familia Duque/AndroidStudioProjects/Eshop-App/app/src/main/res/menu/drawer.xml" value="0.25416666666666665" />
@@ -46,6 +44,7 @@
         <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/fragment_update_product.xml" value="0.17028985507246377" />
         <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/nav_header_drawer.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/product_item.xml" value="0.209375" />
+        <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/layout/splash.xml" value="0.18034447821681865" />
         <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/menu/activity_drawer_drawer.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/luill/AndroidStudioProjects/EshopApp/app/src/main/res/menu/drawer.xml" value="0.1" />
       </map>
