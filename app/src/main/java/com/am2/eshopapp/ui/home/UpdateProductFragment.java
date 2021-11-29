@@ -32,9 +32,6 @@ import java.util.Map;
 
 public class UpdateProductFragment extends Fragment {
     ProductEntity productEntity;
-    TextView textView;
-    Button jbtnCancelProductEdit, jbtnProductEdit;
-    EditText jetEditProductName, jetEditProductDescription, jetEditProductStock, jetEditProductPrice;
     private FragmentUpdateProductBinding binding;
     private FirebaseFirestore db;
 

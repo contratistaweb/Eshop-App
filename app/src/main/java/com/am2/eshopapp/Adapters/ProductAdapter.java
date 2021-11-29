@@ -22,11 +22,7 @@ import com.am2.eshopapp.Entities.SharedPreferenceEntities;
 import com.am2.eshopapp.Entities.Usuario;
 import com.am2.eshopapp.R;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -97,11 +93,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
 
         if ("vendedor".equals(SharedPreferenceEntities.getRol())) {
-//            holder.jbtnAddProduct.setVisibility(View.VISIBLE);
             holder.jbtnProductDelete.setVisibility(View.VISIBLE);
             holder.jbtnProductEdit.setVisibility(View.VISIBLE);
             holder.jbtnComprar.setVisibility(View.INVISIBLE);
         }
+
 
         // Delete Button
         holder.jbtnProductDelete.setOnClickListener(view -> {
@@ -112,11 +108,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         // Edit Button
         holder.jbtnProductEdit.setOnClickListener(view -> {
             productEntity = model.get(position);
-//            SharedPreferenceEntities.limpiarPreferencia();
             Bundle bundle = new Bundle();
             bundle.putSerializable("key", productEntity);
             Navigation.findNavController(holder.itemView).navigate(R.id.updateProductFragment, bundle);
-//            Navigation.findNavController(holder.view).navigate(R.id.updateProductFragment,bundle);
         });
 
         holder.jbtnComprar.setOnClickListener(new View.OnClickListener() {
@@ -127,14 +121,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("key", productEntity);
                     Navigation.findNavController(holder.itemView).navigate(R.id.nav_login, bundle);
-                }else{
+                } else {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("key", productEntity);
+                    bundle.putSerializable("prod", productEntity);
                     Navigation.findNavController(holder.itemView).navigate(R.id.nav_gallery, bundle);
                 }
             }
         });
-
     }
 
     @Override
