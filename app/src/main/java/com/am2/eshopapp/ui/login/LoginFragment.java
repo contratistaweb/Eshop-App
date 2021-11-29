@@ -28,7 +28,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
@@ -47,7 +49,7 @@ public class LoginFragment extends Fragment {
     private Usuario usuario;
 
     private FragmentTransaction transaction;
-    private Fragment fragmentHome, fragmentLogin,  fragmentRegister;
+    private Fragment fragmentHome, fragmentLogin, fragmentRegister;
 
     private FirebaseAuth mAuth;
 
@@ -94,13 +96,13 @@ public class LoginFragment extends Fragment {
                     Pattern p = Pattern.compile(emailPattern);
                     Matcher m = p.matcher(email);
                     boolean b = m.matches();
-                    if(b){
+                    if (b) {
                         // Validar password
                         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{8,}$";
                         Pattern p2 = Pattern.compile(passwordPattern);
                         Matcher m2 = p2.matcher(password);
                         boolean b2 = m2.matches();
-                        if (b2){
+                        if (b2) {
                             mAuth.signInWithEmailAndPassword(email, password)
                                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                         @Override
@@ -124,10 +126,10 @@ public class LoginFragment extends Fragment {
                                     });
 
 //                            findNavController(view).navigate(R.id.nav_home);
-                        }else{
+                        } else {
                             Toast.makeText(getContext(), "Contraseña debil.", Toast.LENGTH_LONG).show();
                         }
-                    }else{
+                    } else {
                         Toast.makeText(getContext(), "Email no coincide.", Toast.LENGTH_LONG).show();
                     }
                 } else {
@@ -140,29 +142,47 @@ public class LoginFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void consultaUser(View view){
+    public void consultaUser(View view) {
         String email = binding.etEmail.getText().toString();
         db.collection("Users").whereEqualTo("email", email)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
-                        usuario = documentSnapshot.toObject(Usuario.class);
-                        break;
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        SharedPreferenceEntities.setEmail(documentSnapshot.getData().get("email").toString());
+                        SharedPreferenceEntities.setName(documentSnapshot.getData().get("name").toString());
+                        SharedPreferenceEntities.setRol(documentSnapshot.getData().get("role").toString());
+                        SharedPreferenceEntities.guardarPreferecia();
+//                        Log.d(getTag(), documentSnapshot.getId() + " => " + documentSnapshot.getData().get("email"));
+//                        Log.d(getTag(), documentSnapshot.getId() + " => " + SharedPreferenceEntities.getRol());
+                        findNavController(view).navigate(R.id.nav_home);
+
                     }
-                    SharedPreferenceEntities.setEmail(usuario.getEmail());
-                    SharedPreferenceEntities.setName(usuario.getName());
-//                    SharedPreferenceEntities.setRol(usuario.getRol());
-                    SharedPreferenceEntities.guardarPreferecia();
-                    findNavController(view).navigate(R.id.nav_home);
-                }else {
-                    Toast.makeText(getContext(), "SharedPreference_Paila", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Log.d(getTag(), "Error getting documents: ", task.getException());
+                    Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+                    SharedPreferenceEntities.limpiarPreferencia();
                 }
             }
         });
     }
 
+//    if (task.isSuccessful()) {
+//        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+//            Toast.makeText(getContext(), "email => " + task.toString(), Toast.LENGTH_LONG).show();
+//            usuario.setEmail(documentSnapshot.get("email").toString()); //.toObject(Usuario.class); // en uso
+//            break;
+//        }
+//        SharedPreferenceEntities.setEmail(usuario.getEmail());
+//        SharedPreferenceEntities.setName(usuario.getName());
+//        SharedPreferenceEntities.setRol(usuario.getRol());
+//        SharedPreferenceEntities.guardarPreferecia();
+//        findNavController(view).navigate(R.id.nav_home);
+//    } else {
+//        Toast.makeText(getContext(), "SharedPreference_Paila", Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public void onDestroyView() {

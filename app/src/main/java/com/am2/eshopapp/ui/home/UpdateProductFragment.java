@@ -84,32 +84,20 @@ public class UpdateProductFragment extends Fragment {
         Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
 
 
-        jbtnProductEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DocumentReference docRef = db.collection("products").document(id.toString());
-                Map<String, Object> dataProduct = new HashMap<>();
-                dataProduct.put("name",jetEditProductName.getText().toString());
-                dataProduct.put("description",jetEditProductDescription.getText().toString());
-                dataProduct.put("stock",jetEditProductStock.getText().toString());
-                dataProduct.put("price",jetEditProductPrice.getText().toString());
+        jbtnProductEdit.setOnClickListener(view1 -> {
+            DocumentReference docRef = db.collection("products").document(id.toString());
+            Map<String, Object> dataProduct = new HashMap<>();
+            dataProduct.put("name", jetEditProductName.getText().toString());
+            dataProduct.put("description", jetEditProductDescription.getText().toString());
+            dataProduct.put("stock", jetEditProductStock.getText().toString());
+            dataProduct.put("price", jetEditProductPrice.getText().toString());
 
-                docRef.update(dataProduct)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(getContext(), "Product updated", Toast.LENGTH_SHORT).show();
-                                findNavController(view).navigate(R.id.nav_home);
-                                
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Product was not updated", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
+            docRef.update(dataProduct)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getContext(), "Product updated", Toast.LENGTH_SHORT).show();
+                        findNavController(view1).navigate(R.id.nav_home);
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Product was not updated", Toast.LENGTH_SHORT).show());
         });
 
         jbtnCancelProductEdit.setOnClickListener(new View.OnClickListener() {

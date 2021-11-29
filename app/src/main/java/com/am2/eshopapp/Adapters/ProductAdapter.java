@@ -96,8 +96,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         });
 
-        String email = SharedPreferenceEntities.leerPreferencia(3);
-        if (email.equals("p.anito@example.com")) {
+        if ("vendedor".equals(SharedPreferenceEntities.getRol())) {
 //            holder.jbtnAddProduct.setVisibility(View.VISIBLE);
             holder.jbtnProductDelete.setVisibility(View.VISIBLE);
             holder.jbtnProductEdit.setVisibility(View.VISIBLE);
@@ -123,8 +122,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.jbtnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = SharedPreferenceEntities.leerPreferencia(2);
-                if (email.equals("")) {
+                if (SharedPreferenceEntities.getEmail() == null) {
                     Toast.makeText(context, "Debes iniciar sesión.", Toast.LENGTH_LONG).show();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("key", productEntity);

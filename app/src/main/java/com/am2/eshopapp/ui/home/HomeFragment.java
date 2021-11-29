@@ -4,6 +4,7 @@ import static androidx.navigation.Navigation.findNavController;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,11 +39,29 @@ public class HomeFragment extends Fragment {
     Button btnAddProduct, btnProductEdit;
     TextView tvProductId;
     private FirebaseFirestore db;
+    private String role;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        Log.d(getTag(), "*** Role *** => " + SharedPreferenceEntities.getRol());
+        Log.d(getTag(), "*** Email *** => " + SharedPreferenceEntities.getEmail());
+        role = SharedPreferenceEntities.getRol();
+        btnAddProduct = view.findViewById(R.id.btnGoProductCreate);
+
+        if ("vendedor".equals(role)) {
+            btnAddProduct.setVisibility(View.VISIBLE);
+        } else {
+            btnAddProduct.setVisibility(View.INVISIBLE);
+        }
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         recyclerViewProduct = view.findViewById(R.id.rvProducts);
         db = FirebaseFirestore.getInstance();
         listProduct = new ArrayList<>();
@@ -50,21 +70,7 @@ public class HomeFragment extends Fragment {
         // Mostrar data
         showData();
 
-        btnAddProduct = view.findViewById(R.id.btnGoProductCreate);
-        String rol = "";
-            if (rol.equals("vendedor")) {
-                btnAddProduct.setVisibility(View.VISIBLE);
-            } else {
-                btnAddProduct.setVisibility(View.INVISIBLE);
-            }
-        btnAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findNavController(view).navigate(R.id.productCreateFragment);
-            }
-        });
-
-        return view;
+//        btnAddProduct.setOnClickListener(view1 -> findNavController(view1).navigate(R.id.productCreateFragment));
     }
 
     public void showData() {
@@ -75,22 +81,18 @@ public class HomeFragment extends Fragment {
     }
 
     public void getProducts() {
-        db.collection("products")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            Toast.makeText(getContext(), "Failed to retrive data", Toast.LENGTH_SHORT);
-                            return;
-                        }
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-                                listProduct.add(dc.getDocument().toObject(ProductEntity.class));
-                            }
-                        }
-                        productAdapter.notifyDataSetChanged();
-                    }
-                });
+        db.collection("products").addSnapshotListener((value, error) -> {
+            if (error != null) {
+                Toast.makeText(getContext(), "Failed to retrive data", Toast.LENGTH_SHORT);
+                return;
+            }
+            for (DocumentChange dc : value.getDocumentChanges()) {
+                if (dc.getType() == DocumentChange.Type.ADDED) {
+                    listProduct.add(dc.getDocument().toObject(ProductEntity.class));
+                }
+            }
+            productAdapter.notifyDataSetChanged();
+        });
     }
 
     @Override

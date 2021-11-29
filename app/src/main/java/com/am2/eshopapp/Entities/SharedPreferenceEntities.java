@@ -41,24 +41,30 @@ public class SharedPreferenceEntities {
         SharedPreferenceEntities.name = name;
     }
 
-    public static void guardarPreferecia(){
+    public static void guardarPreferecia() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(getContext()
-                .getText(R.string.Preference_key).toString(),Context.MODE_PRIVATE);
+                .getText(R.string.Preference_key).toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if (!getEmail().isEmpty()){
+        if (!getEmail().isEmpty()) {
             editor.putString("email", getEmail());
-            editor.putString("name", getName());
-            editor.putString("rol", getRol());
+        }
+
+        if (!getRol().isEmpty()) {
+            editor.putString("rol", getEmail());
+        }
+
+        if (!getName().isEmpty()) {
+            editor.putString("name", getEmail());
         }
 
         editor.commit();
     }
 
-    public static String leerPreferencia(int interador){
+    public static String leerPreferencia(int interador) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(getContext()
-                .getText(R.string.Preference_key).toString(),Context.MODE_PRIVATE);
-        switch (interador){
+                .getText(R.string.Preference_key).toString(), Context.MODE_PRIVATE);
+        switch (interador) {
             case 1:
                 SharedPreferenceEntities.name = sharedPreferences.getString("name", "");
                 return getName();
@@ -71,13 +77,14 @@ public class SharedPreferenceEntities {
                 SharedPreferenceEntities.rol = sharedPreferences.getString("rol", "");
                 return getRol();
 
-            default:return "";
+            default:
+                return "";
         }
     }
 
-    public static void limpiarPreferencia(){
+    public static void limpiarPreferencia() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(getContext()
-                .getText(R.string.Preference_key).toString(),Context.MODE_PRIVATE);
+                .getText(R.string.Preference_key).toString(), Context.MODE_PRIVATE);
         sharedPreferences.edit().clear().commit();
     }
 }
