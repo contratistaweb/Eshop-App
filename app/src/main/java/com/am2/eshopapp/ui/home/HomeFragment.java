@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.am2.eshopapp.Adapters.ProductAdapter;
 import com.am2.eshopapp.Entities.ProductEntity;
+import com.am2.eshopapp.Entities.SharedPreferenceEntities;
 import com.am2.eshopapp.R;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -31,16 +31,17 @@ public class HomeFragment extends Fragment {
     ProductAdapter productAdapter;
     RecyclerView recyclerViewProduct;
     ArrayList<ProductEntity> listProduct;
-    Button btnAddProduct, btnProductEdit;
-    TextView tvProductId;
+    Button btnAddProduct, btnSingOff;
     private FirebaseFirestore db;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         recyclerViewProduct = view.findViewById(R.id.rvProducts);
         db = FirebaseFirestore.getInstance();
+
         listProduct = new ArrayList<>();
         // Cargar la lista
         getProducts();
@@ -48,16 +49,33 @@ public class HomeFragment extends Fragment {
         showData();
 
         btnAddProduct = view.findViewById(R.id.btnGoProductCreate);
-        String role = "vendedor";
-        if(role.equals("vendedor")){
-            btnAddProduct.setVisibility(View.VISIBLE);
-        }
+        btnSingOff = view.findViewById(R.id.btnSingOff);
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 findNavController(view).navigate(R.id.productCreateFragment);
             }
         });
+
+        btnSingOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferenceEntities.limpiarPreferencia();
+                findNavController(view).navigate(R.id.nav_home);
+                Toast.makeText(getContext(), "Sesión Cerrada Correctamente", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        SharedPreferenceEntities.setContext(getContext());
+        String rol = SharedPreferenceEntities.leerPreferencia(3);
+        if(rol.equals("vendedor")){
+            btnAddProduct.setVisibility(View.VISIBLE);
+        }
+
+        String email = SharedPreferenceEntities.leerPreferencia(2);
+        if(email != ""){
+            btnSingOff.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -67,13 +85,6 @@ public class HomeFragment extends Fragment {
         recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getContext()));
         productAdapter = new ProductAdapter(getContext(), listProduct, db);
         recyclerViewProduct.setAdapter(productAdapter);
-
-//        productAdapter.SetOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
     }
 
     public void getProducts() {

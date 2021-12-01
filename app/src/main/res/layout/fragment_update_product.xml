@@ -30,6 +30,17 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvFacturaTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/factura_title"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
             <EditText
                 android:id="@+id/etEditProductName"
                 android:layout_width="match_parent"
@@ -65,6 +76,33 @@
                 android:hint="@string/product_create_ph_price"
                 android:inputType="textPersonName"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/tvMensajeCompra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/factura_mensaje"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnRegresarTienda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="@string/factura_regresar"
+                    android:visibility="gone" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

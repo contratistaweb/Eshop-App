@@ -1,6 +1,7 @@
 package com.am2.eshopapp;
 
 import android.app.FragmentManager;
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import com.am2.eshopapp.ui.slideshow.SlideshowFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;

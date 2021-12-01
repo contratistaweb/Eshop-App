@@ -97,10 +97,11 @@ this.context = context;
 
         });
 
-        String email = SharedPreferenceEntities.leerPreferencia(2);
-        if(email.equals("p.anito@example.com")){
+        String rol = SharedPreferenceEntities.leerPreferencia(3);
+        if(rol.equals("vendedor")){
             holder.jbtnProductDelete.setVisibility(View.VISIBLE);
             holder.jbtnProductEdit.setVisibility(View.VISIBLE);
+            holder.jbtnComprar.setVisibility(View.GONE);
         }
 
         // Delete Button
@@ -112,11 +113,9 @@ this.context = context;
         // Edit Button
         holder.jbtnProductEdit.setOnClickListener(view -> {
         productEntity = model.get(position);
-            SharedPreferenceEntities.limpiarPreferencia();
             Bundle bundle = new Bundle();
             bundle.putSerializable("key",productEntity);
             Navigation.findNavController(holder.itemView).navigate(R.id.updateProductFragment,bundle);
-//            Navigation.findNavController(holder.view).navigate(R.id.updateProductFragment,bundle);
         });
 
         holder.jbtnComprar.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +127,11 @@ this.context = context;
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("key",productEntity);
                     Navigation.findNavController(holder.itemView).navigate(R.id.nav_login,bundle);
+                }else {
+                    productEntity = model.get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("key",productEntity);
+                    Navigation.findNavController(holder.itemView).navigate(R.id.updateProductFragment,bundle);
                 }
             }
         });
@@ -148,7 +152,7 @@ this.context = context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jetUserEmail, jetUserName, jtvProductId, jtvProductName, jtvProductPrice, jtvProductStock, jtvProductDescription;
-        Button jbtnProductDelete, jbtnProductEdit, jbtnComprar;
+        Button jbtnProductDelete, jbtnProductEdit, jbtnComprar, jbtnAdd;
         ImageView jivProductImg;
         View view;
 
@@ -165,6 +169,7 @@ this.context = context;
             jbtnProductDelete = itemView.findViewById(R.id.btnProductDelete);
             jbtnProductEdit = itemView.findViewById(R.id.btnProductEdit);
             jbtnComprar = itemView.findViewById(R.id.btnComprar);
+            jbtnAdd = itemView.findViewById(R.id.btnGoProductCreate);
             jivProductImg = itemView.findViewById(R.id.ivProductImg);
         }
     }

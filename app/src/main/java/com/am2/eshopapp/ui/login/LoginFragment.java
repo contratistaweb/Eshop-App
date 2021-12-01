@@ -153,7 +153,7 @@ public class LoginFragment extends Fragment {
                     }
                     SharedPreferenceEntities.setEmail(usuario.getEmail());
                     SharedPreferenceEntities.setName(usuario.getName());
-//                    SharedPreferenceEntities.setRol(usuario.getRol());
+                    SharedPreferenceEntities.setRol(usuario.getRol());
                     SharedPreferenceEntities.guardarPreferecia();
                     findNavController(view).navigate(R.id.nav_home);
                 }else {

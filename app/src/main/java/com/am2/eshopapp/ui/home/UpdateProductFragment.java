@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.am2.eshopapp.Entities.ProductEntity;
+import com.am2.eshopapp.Entities.SharedPreferenceEntities;
 import com.am2.eshopapp.R;
 import com.am2.eshopapp.databinding.FragmentProductCreateBinding;
 import com.am2.eshopapp.databinding.FragmentUpdateProductBinding;
@@ -66,12 +67,16 @@ public class UpdateProductFragment extends Fragment {
 
         Button jbtnCancelProductEdit = binding.btnCancelEditProduct;
         Button jbtnProductEdit = binding.btnOneProductEdit;
+        Button jbtnRegresarTienda = binding.btnRegresarTienda;
 
 
         EditText jetEditProductName = binding.etEditProductName;
         EditText jetEditProductStock = binding.etEditProductStock;
         EditText jetEditProductPrice = binding.etEditProductPrice;
         EditText jetEditProductDescription = binding.etEditProductDescription;
+        TextView jtvProductCreateTitle = binding.tvProductCreateTitle;
+        TextView jtvFacturaTitle = binding.tvFacturaTitle;
+        TextView jtvMensajeCompra = binding.tvMensajeCompra;
 
         productEntity = (ProductEntity) getArguments().getSerializable("key");
 
@@ -83,6 +88,23 @@ public class UpdateProductFragment extends Fragment {
 
         Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
 
+        String rol = SharedPreferenceEntities.leerPreferencia(3);
+        if(rol.equals("usuario")){
+            jbtnCancelProductEdit.setVisibility(View.GONE);
+            jbtnProductEdit.setVisibility(View.GONE);
+            jetEditProductStock.setVisibility(View.GONE);
+            jtvProductCreateTitle.setVisibility(View.GONE);
+            jtvFacturaTitle.setVisibility(View.VISIBLE);
+            jtvMensajeCompra.setVisibility(View.VISIBLE);
+            jbtnRegresarTienda.setVisibility(View.VISIBLE);
+        }
+
+        jbtnRegresarTienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNavController(view).navigate(R.id.nav_home);
+            }
+        });
 
         jbtnProductEdit.setOnClickListener(new View.OnClickListener() {
             @Override

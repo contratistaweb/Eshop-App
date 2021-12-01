@@ -50,10 +50,18 @@ public class SharedPreferenceEntities {
             editor.putString("email", getEmail());
         }
 
+        if (!getName().isEmpty()){
+            editor.putString("name", getName());
+        }
+
+        if (!getRol().isEmpty()){
+            editor.putString("rol", getRol());
+        }
+
         editor.commit();
     }
 
-    public static String leerPreferencia(int interador){
+ public static String leerPreferencia(int interador){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(getContext()
                 .getText(R.string.Preference_key).toString(),Context.MODE_PRIVATE);
         switch (interador){
