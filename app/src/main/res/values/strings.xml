@@ -42,6 +42,7 @@
 <!-- Create fragment -->
     <string name="product_update_title">Edit product</string>
     <string name="factura_title">Factura de venta</string>
+    <string name="producto_agotado">Producto agotado...! Esperalo pronto !</string>
     <string name="factura_mensaje">¡..Gracias por tu compra..!</string>
     <string name="product_create_title">Create new product</string>
     <string name="product_create_ph_name">Product name</string>
@@ -52,6 +53,7 @@
     <string name="factura_regresar">Continuar comprando</string>
     <string name="product_create_btn_cancel">Cancel</string>
     <string name="product_create_btn_create">Confirm</string>
+    <string name="confirmar_compra">Confirmar Compra</string>
     <string name="product_create_btnPickImage">Seleccionar Imagen</string>
 
     <!-- Create fragment -->

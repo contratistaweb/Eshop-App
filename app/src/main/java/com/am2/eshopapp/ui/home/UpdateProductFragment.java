@@ -26,6 +26,7 @@ import com.am2.eshopapp.databinding.FragmentUpdateProductBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -68,7 +69,7 @@ public class UpdateProductFragment extends Fragment {
         Button jbtnCancelProductEdit = binding.btnCancelEditProduct;
         Button jbtnProductEdit = binding.btnOneProductEdit;
         Button jbtnRegresarTienda = binding.btnRegresarTienda;
-
+        Button jbtnConfirmarCompra = binding.btnConfirmarCompra;
 
         EditText jetEditProductName = binding.etEditProductName;
         EditText jetEditProductStock = binding.etEditProductStock;
@@ -77,6 +78,7 @@ public class UpdateProductFragment extends Fragment {
         TextView jtvProductCreateTitle = binding.tvProductCreateTitle;
         TextView jtvFacturaTitle = binding.tvFacturaTitle;
         TextView jtvMensajeCompra = binding.tvMensajeCompra;
+        TextView jtvProductoAgotado = binding.tvAgotado;
 
         productEntity = (ProductEntity) getArguments().getSerializable("key");
 
@@ -88,16 +90,65 @@ public class UpdateProductFragment extends Fragment {
 
         Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
 
+        db.collection("products").document(id.toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    String stock = documentSnapshot.getString("stock");
+                    if (stock.equals("0")){
+                        jtvProductoAgotado.setVisibility(View.VISIBLE);
+                        jbtnProductEdit.setVisibility(View.GONE);
+                        jbtnConfirmarCompra.setVisibility(View.GONE);
+                        jbtnCancelProductEdit.setVisibility(View.GONE);
+                        jtvFacturaTitle.setVisibility(View.GONE);
+                        jbtnRegresarTienda.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
         String rol = SharedPreferenceEntities.leerPreferencia(3);
         if(rol.equals("usuario")){
-            jbtnCancelProductEdit.setVisibility(View.GONE);
             jbtnProductEdit.setVisibility(View.GONE);
+            jbtnConfirmarCompra.setVisibility(View.VISIBLE);
             jetEditProductStock.setVisibility(View.GONE);
             jtvProductCreateTitle.setVisibility(View.GONE);
             jtvFacturaTitle.setVisibility(View.VISIBLE);
-            jtvMensajeCompra.setVisibility(View.VISIBLE);
-            jbtnRegresarTienda.setVisibility(View.VISIBLE);
         }
+
+        jbtnConfirmarCompra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DocumentReference docRef = db.collection("products").document(id.toString());
+                Map<String, Object> dataProduct = new HashMap<>();
+
+                String nStock = jetEditProductStock.getText().toString();
+                int noStock = Integer.parseInt(nStock);
+                int stockTotal = noStock-1;
+                String compraProducto = String.valueOf(stockTotal);
+
+                dataProduct.put("stock",compraProducto);
+
+                docRef.update(dataProduct)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                jtvMensajeCompra.setVisibility(View.VISIBLE);
+                                jbtnRegresarTienda.setVisibility(View.VISIBLE);
+                                jbtnCancelProductEdit.setVisibility(View.GONE);
+                                jbtnConfirmarCompra.setVisibility(View.GONE);
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Product was not updated", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+//                findNavController(view).navigate(R.id.nav_home);
+            }
+        });
 
         jbtnRegresarTienda.setOnClickListener(new View.OnClickListener() {
             @Override
