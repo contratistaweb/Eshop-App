@@ -2,8 +2,10 @@ package com.am2.eshopapp.Entities;
 
 public class Usuario {
     private String email;
+    private String cel;
     private String name;
-    private String rol;
+    private String password;
+    private String role;
 
     public String getEmail() {
         return email;
@@ -11,6 +13,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCel() {
+        return cel;
+    }
+
+    public void setCel(String cel) {
+        this.cel = cel;
     }
 
     public String getName() {
@@ -21,11 +31,22 @@ public class Usuario {
         this.name = name;
     }
 
-    public String getRol() {
-        return rol;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+
 }
