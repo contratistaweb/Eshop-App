@@ -156,6 +156,10 @@ public class LoginFragment extends Fragment {
                     SharedPreferenceEntities.setRol(usuario.getRol());
                     SharedPreferenceEntities.guardarPreferecia();
                     findNavController(view).navigate(R.id.nav_home);
+                    String name = SharedPreferenceEntities.leerPreferencia(1);
+                    if (name != ""){
+                        Toast.makeText(getContext(), "Hola, " + name, Toast.LENGTH_SHORT).show();
+                    }
                 }else {
                     Toast.makeText(getContext(), "SharedPreference_Paila", Toast.LENGTH_SHORT).show();
                 }

@@ -80,19 +80,28 @@ public class UpdateProductFragment extends Fragment {
         productEntity = (ProductEntity) getArguments().getSerializable("key");
 
         String id = productEntity.getId();
-        jetEditProductName.setText(productEntity.getName());
+        jetEditProductName.setText("Name: " + productEntity.getName());
         jetEditProductStock.setText(productEntity.getStock());
-        jetEditProductPrice.setText(productEntity.getPrice());
-        jetEditProductDescription.setText(productEntity.getDescription());
+        jetEditProductPrice.setText("Price: " + productEntity.getPrice());
+        jetEditProductDescription.setText("Description: " + productEntity.getDescription());
 
         Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+
+        String rol = SharedPreferenceEntities.leerPreferencia(3);
+        if(rol.equals("usuario")){
+            jbtnProductEdit.setVisibility(View.GONE);
+            jbtnConfirmarCompra.setVisibility(View.VISIBLE);
+            jetEditProductStock.setVisibility(View.GONE);
+            jtvProductCreateTitle.setVisibility(View.GONE);
+            jtvFacturaTitle.setVisibility(View.VISIBLE);
+        }
 
         db.collection("products").document(id.toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     String stock = documentSnapshot.getString("stock");
-                    if (stock.equals("0")){
+                    if (stock.equals("0") && rol.equals("usuario")){
                         jtvProductoAgotado.setVisibility(View.VISIBLE);
                         jbtnProductEdit.setVisibility(View.GONE);
                         jbtnConfirmarCompra.setVisibility(View.GONE);
@@ -103,15 +112,6 @@ public class UpdateProductFragment extends Fragment {
                 }
             }
         });
-
-        String rol = SharedPreferenceEntities.leerPreferencia(3);
-        if(rol.equals("usuario")){
-            jbtnProductEdit.setVisibility(View.GONE);
-            jbtnConfirmarCompra.setVisibility(View.VISIBLE);
-            jetEditProductStock.setVisibility(View.GONE);
-            jtvProductCreateTitle.setVisibility(View.GONE);
-            jtvFacturaTitle.setVisibility(View.VISIBLE);
-        }
 
         jbtnConfirmarCompra.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -126,14 +126,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="@string/product_create_btn_cancel" />
+                    android:text="@string/product_create_btn_cancel"
+                    android:textSize="12dp" />
 
                 <Button
                     android:id="@+id/btnOneProductEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="@string/product_create_btn_create" />
+                    android:text="@string/product_create_btn_create"
+                    android:textSize="12dp" />
 
                 <Button
                     android:id="@+id/btnConfirmarCompra"
@@ -141,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="@string/confirmar_compra"
+                    android:textSize="12dp"
                     android:visibility="gone" />
 
             </LinearLayout>
