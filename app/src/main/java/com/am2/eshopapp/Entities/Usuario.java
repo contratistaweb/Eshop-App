@@ -39,11 +39,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRole() {
+    public String getRol() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRol(String role) {
         this.role = role;
     }
 
